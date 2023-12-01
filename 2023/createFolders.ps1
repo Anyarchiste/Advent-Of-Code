@@ -1,4 +1,6 @@
-<#Creates 25 folders named "dayXX" where XX = 01->25#>
+<#Creates 25 folders named "dayXX" where XX = 01->25
+WARNING it creates the folder in the folder it is in. Make sure you are in
+the right one#>
 
 $A = 25
 
