@@ -3,7 +3,7 @@ package day01;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
-import Paths.paths;
+import Year_2023.paths;
 
 /**
  * Challenge-1
