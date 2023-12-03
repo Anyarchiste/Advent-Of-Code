@@ -3,7 +3,6 @@ package day02;
 import java.io.File;
 import java.util.Scanner;
 // import day02.paths;
-import java.util.regex.Pattern;
 
 public class Challenge {
     // 12 red cubes, 13 green cubes, and 14 blue cubes
