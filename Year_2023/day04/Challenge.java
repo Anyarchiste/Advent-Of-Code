@@ -2,6 +2,8 @@ package day04;
 
 import java.io.File;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Challenge {
     public static void main(String[] args) throws Exception {
@@ -12,44 +14,50 @@ public class Challenge {
         while (input.hasNextLine()) {
             String line = input.nextLine();
 
-            line = line.replaceAll("Card [0-9]*: *", "");
+            line = line.replaceAll("Card *[0-9]*: *", "");
 
             // Index 0 --> Winners
             // Index 1 --> Played
-            String[] table = line.split("\u007C");
+            String[] table = line.split(" \\| ");
 
-            String[] winner = table[0].split("\s");
-            String[] played = table[1].split("\s");
+            String[] winner = getRidOfFuckingSpaces(table[0].split("\s"));
+            String[] played = getRidOfFuckingSpaces(table[1].split("\s"));
+
             int winnerCount = 0;
             String[] winnerList = new String[5];
-
             for (String string : played) {
                 for (int i = 0; i < winner.length; i++) {
-                    if (Integer.valueOf(string) == Integer.valueOf(winner[i])) {
+                    if (string == "") {
+                        break;
+                    } else if (Integer.valueOf(string) == Integer.valueOf(winner[i])) {
+                        winnerList[winnerCount] = string;
                         winnerCount += 1;
-                        winnerList[i] = string;
                     }
                 }
-            }
 
-            if (winnerCount == 0) {
-                System.out.println("There was no winning number on this card, sorry");
-            } else if (winnerCount == 1) {
-                System.out.println("You got one winning number:" + winnerList[0] + " That gives you 1 point");
-                totalPoints++;
-            } else {
-                int intermediatePoints = 0;
-                intermediatePoints++;
-                for (int i = 1; i < (winnerList.length); i++) {
-                    if (i <= 2) {
-                        intermediatePoints += 2;
-                    } else if (i > 2 && i <= 5) {
-                        intermediatePoints += 3;
-                    }
-                }
-                totalPoints += intermediatePoints;
             }
+            totalPoints += countPoints(winnerCount);
         }
         System.out.println("Puzzle answer: " + totalPoints);
+        input.close();
+    }
+
+    public static int countPoints(int x) {
+        if (x == 0) {
+            return 0;
+        } else {
+            // 1 << N is 2^N
+            return 1 << (x - 1);
+        }
+    }
+
+    public static String[] getRidOfFuckingSpaces(String[] args) {
+        String[] clean = new String[args.length];
+
+        for (int i = 0; i < args.length; i++) {
+            clean[i] = args[i].replace(" ", "");
+        }
+
+        return clean;
     }
 }
