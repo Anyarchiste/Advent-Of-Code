@@ -1,9 +1,9 @@
 package day04;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Challenge {
     public static void main(String[] args) throws Exception {
@@ -24,7 +24,7 @@ public class Challenge {
             String[] played = getRidOfFuckingSpaces(table[1].split("\s"));
 
             int winnerCount = 0;
-            String[] winnerList = new String[5];
+            String[] winnerList = new String[5000];
             for (String string : played) {
                 for (int i = 0; i < winner.length; i++) {
                     if (string == "") {
@@ -52,12 +52,18 @@ public class Challenge {
     }
 
     public static String[] getRidOfFuckingSpaces(String[] args) {
-        String[] clean = new String[args.length];
+    String[] firstArray = args;
 
-        for (int i = 0; i < args.length; i++) {
-            clean[i] = args[i].replace(" ", "");
-        }
+    List<String> list = new ArrayList<String>();
 
-        return clean;
+    for(String s : firstArray) {
+       if(s != null && s.length() > 0) {
+          list.add(s);
+       }
+    }
+
+    firstArray = list.toArray(new String[list.size()]);
+
+    return firstArray;
     }
 }
