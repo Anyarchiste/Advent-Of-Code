@@ -49,8 +49,10 @@ public class Challenge {
 
     public static char[] stringToInt(char[] line) {
         String r = String.valueOf(line);
-        String[] numbers = new String[]{"eight","two","one","three","four","five","six","seven","nine"};
-        String[] numerals = new String[]{"e8t","t2o","o1e","t3e","f4r","f5e","s6x","s7n","n9e"};
+        String[] numbers = new String[] { "eight", "two", "one", "three",
+                "four", "five", "six", "seven", "nine" };
+        String[] numerals = new String[] { "e8t", "t2o", "o1e", "t3e", "f4r",
+                "f5e", "s6x", "s7n", "n9e" };
         for (int i = 0; i < numbers.length; i++) {
             r = r.replace(numbers[i], numerals[i]);
         }
