@@ -4,3 +4,8 @@ paths.java
 2024/day01/bin/secrets/secrets.class
 2024/day01/bin/App.class
 2024/day01/src/secrets/secrets.java
+2024/day02/bin/App.class
+2024/day02/bin/Report.class
+2024/day02/bin/secret/secret.class
+2024/day02/bin/input.txt
+2024/day02/src/secret/secret.java
