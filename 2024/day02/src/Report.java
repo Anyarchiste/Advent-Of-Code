@@ -12,6 +12,7 @@ public class Report {
         this.report = report;
         ascending = true;
         this.safe = checkSafety();
+        System.out.println(safe);
     }
 
     private Boolean checkSafety() {
@@ -24,22 +25,16 @@ public class Report {
 
         for (int i = 0; i < report.size(); i++) {
 
-            int difference = report.get(i) - report.get(i + 1);
-
-            if (difference < 0 && ascending) {
-                if (Math.abs(difference) <= 3 && Math.abs(difference) >= 1) {
+            if (!checkPairSafety(i, i + 1)) {
+                if (checkPairSafety(i, i + 2)) {
                     safetyChecksPassed.add(true);
+                    i++;
                 } else {
                     safetyChecksPassed.add(false);
-                }
-            } else if (difference > 0 && !ascending) {
-                if (Math.abs(difference) <= 3 && Math.abs(difference) >= 1) {
-                    safetyChecksPassed.add(true);
-                } else {
-                    safetyChecksPassed.add(false);
+                    i++;
                 }
             } else {
-                safetyChecksPassed.add(false);
+                safetyChecksPassed.add(true);
             }
 
             if (i + 2 >= report.size()) {
@@ -55,6 +50,34 @@ public class Report {
         }
 
         return safety;
+    }
+
+    private boolean checkPairSafety(int i, int y) {
+        boolean isSafe = false;
+
+        if (y < report.size()) {
+            int difference = report.get(i) - report.get(y);
+
+            if (difference < 0 && ascending) {
+                if (Math.abs(difference) <= 3 && Math.abs(difference) >= 1) {
+                    isSafe = true;
+                } else {
+                    isSafe = false;
+                }
+            } else if (difference > 0 && !ascending) {
+                if (Math.abs(difference) <= 3 && Math.abs(difference) >= 1) {
+                    isSafe = true;
+                } else {
+                    isSafe = false;
+                }
+            } else {
+                isSafe = false;
+            }
+        } else {
+            isSafe = true;
+        }
+
+        return isSafe;
     }
 
     public Boolean getSafe() {
